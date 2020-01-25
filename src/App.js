@@ -1,38 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Switch from "@material-ui/core/Switch";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./theme";
+import { GlobalStyles } from "./global";
 
 function App() {
-  const [state, setState] = React.useState({
-    checked: true
-  });
-
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const [theme, setTheme] = useState("light");
+  // The function that toggles between themes
+  const toggleTheme = () => {
+    // if the theme is not light, then set it to dark
+    if (theme === "light") {
+      setTheme("dark");
+      // otherwise, it should be light
+    } else {
+      setTheme("light");
+    }
   };
 
   return (
     <div>
-      <div className="title">
-        <h1>Kryptonite</h1>
-      </div>
-      <div>
-        <div className="theme">
-          <div className="themeText">dark mode</div>
-          <div className="themeSwitch">
-            <Switch
-              checked={state.checked}
-              onChange={handleChange("checked")}
-              value="dark-theme"
-              inputProps={{ "aria-label": "secondary checkbox" }}
-            />
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <>
+          <GlobalStyles />
+          <div className="title">
+            <h1>Kryptonite</h1>
           </div>
-        </div>
-      </div>
-      <div className=""></div>
-      <div className="footer">
-        <p>Copyright © Danilo Lučić 2020</p>
-      </div>
+          <button className="themeButton" onClick={toggleTheme}>
+            change theme
+          </button>
+          <div className="main"></div>
+          <footer>
+            <div className="footer">
+              <p>Copyright © Danilo Lučić 2020</p>
+            </div>
+          </footer>
+        </>
+      </ThemeProvider>
     </div>
   );
 }

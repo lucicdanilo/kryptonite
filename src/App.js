@@ -29,6 +29,10 @@ function App() {
           </div>
         </div>
       </div>
+      <div className=""></div>
+      <div className="footer">
+        <p>Copyright © Danilo Lučić 2020</p>
+      </div>
     </div>
   );
 }

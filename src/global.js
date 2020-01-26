@@ -48,5 +48,35 @@ export const GlobalStyles = createGlobalStyle`
     border: 2px solid #00d548;
   }
   
-  
-  `;
+  form > h1{
+    margin-top: 8%;
+  }
+
+  table {
+    width: 60%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    
+  }
+  table, th, td {
+    padding: 1%;
+  }
+
+  input[type=submit] {
+    background-color: #00d548;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 8% 1px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 120%;
+  }
+
+  input[type=checkbox] {
+    margin-left: 3%;
+  }
+
+`;

@@ -4,32 +4,32 @@ import React from "react";
 
 class Choose extends React.Component {
   state = {
-    btc: false,
-    eth: false,
-    xrp: false,
-    bch: false,
-    ada: false,
-    ltc: false,
+    BTC: false,
+    ETH: false,
+    XRP: false,
+    BCH: false,
+    ADA: false,
+    LTC: false,
     currency: "European Euro"
   };
   handleCheck = event => {
     switch (event.target.name) {
-      case "btc":
+      case "BTC":
         this.setState({ btc: event.target.checked });
         break;
-      case "eth":
+      case "ETH":
         this.setState({ eth: event.target.checked });
         break;
-      case "xrp":
+      case "XRP":
         this.setState({ xrp: event.target.checked });
         break;
-      case "bch":
+      case "BCH":
         this.setState({ bch: event.target.checked });
         break;
-      case "ada":
+      case "ADA":
         this.setState({ ada: event.target.checked });
         break;
-      case "ltc":
+      case "LTC":
         this.setState({ ltc: event.target.checked });
         break;
       default:
@@ -74,19 +74,19 @@ class Choose extends React.Component {
     var chosenCryptocurrency = [];
     var chosenCurrency = this.state.currency;
     if (this.state.btc) {
-      chosenCryptocurrency.push("btc");
+      chosenCryptocurrency.push("BTC");
     }
     if (this.state.eth) {
-      chosenCryptocurrency.push("eth");
+      chosenCryptocurrency.push("ETH");
     }
     if (this.state.xrp) {
-      chosenCryptocurrency.push("xrp");
+      chosenCryptocurrency.push("XRP");
     }
     if (this.state.bch) {
-      chosenCryptocurrency.push("bch");
+      chosenCryptocurrency.push("BCH");
     }
     if (this.state.ada) {
-      chosenCryptocurrency.push("ada");
+      chosenCryptocurrency.push("ADA");
     }
     if (this.state.ltc) {
       chosenCryptocurrency.push("ltc");
@@ -94,7 +94,12 @@ class Choose extends React.Component {
     console.log(chosenCryptocurrency);
     console.log(chosenCurrency);
     if (chosenCryptocurrency.length >= 1) {
-      // Main component for displaying data!
+      var obj = {
+        chosenCryptocurrency: chosenCryptocurrency,
+        chosenCurrency: chosenCurrency
+      };
+      var formDataJSON = JSON.stringify(obj);
+      localStorage.setItem("formData", formDataJSON);
     } else {
       alert("Choose currency, please.");
     }
@@ -178,15 +183,15 @@ class Choose extends React.Component {
         <div className="chooseCurrency" onChange={this.handleSelect}>
           <label>Choose currency:</label>
           <select value={this.state.currency}>
-            <option>U.S. Dollar</option>
-            <option>European Euro</option>
-            <option>Japanese Yen</option>
-            <option>British Pound</option>
-            <option>Swiss Franc</option>
-            <option>Canadian Dollar</option>
-            <option>Australian Dollar</option>
-            <option>New Zealand Dollar</option>
-            <option>South African Rand</option>
+            <option name="USF">U.S. Dollar</option>
+            <option name="EUR">European Euro</option>
+            <option name="JPY">Japanese Yen</option>
+            <option name="GBP">British Pound</option>
+            <option name="CHF">Swiss Franc</option>
+            <option name="CAD">Canadian Dollar</option>
+            <option name="AUD">Australian Dollar</option>
+            <option name="NZD">New Zealand Dollar</option>
+            <option name="ZAR">South African Rand</option>
           </select>
         </div>
         <input type="submit" className="chooseCryptocurrency" value="Submit" />

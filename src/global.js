@@ -69,7 +69,7 @@ export const GlobalStyles = createGlobalStyle`
     color: white;
     padding: 16px 32px;
     text-decoration: none;
-    margin: 8% 1px;
+    margin: 5% 1px;
     cursor: pointer;
     border-radius: 8px;
     font-size: 120%;
@@ -79,4 +79,13 @@ export const GlobalStyles = createGlobalStyle`
     margin-left: 3%;
   }
 
+  .chooseCurrency {
+    margin-top: 3%;
+  }
+
+  .chooseCurrency > select {
+    margin-left: 1%;
+  }
+
+  
 `;

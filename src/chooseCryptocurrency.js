@@ -9,10 +9,10 @@ class Choose extends React.Component {
     xrp: false,
     bch: false,
     ada: false,
-    ltc: false
+    ltc: false,
+    currency: "European Euro"
   };
   handleCheck = event => {
-    console.log(event.target.name);
     switch (event.target.name) {
       case "btc":
         this.setState({ btc: event.target.checked });
@@ -36,9 +36,43 @@ class Choose extends React.Component {
     }
   };
 
+  handleSelect = event => {
+    switch (event.target.value) {
+      case "U.S. Dollar":
+        this.setState({ currency: "USD" });
+        break;
+      case "European Euro":
+        this.setState({ currency: "EUR" });
+        break;
+      case "Japanese Yen":
+        this.setState({ currency: "JPY" });
+        break;
+      case "British Pound":
+        this.setState({ currency: "GBP" });
+        break;
+      case "Swiss Franc":
+        this.setState({ currency: "CHF" });
+        break;
+      case "Canadian Dollar":
+        this.setState({ currency: "CAD" });
+        break;
+      case "Australian Dollar":
+        this.setState({ currency: "AUD" });
+        break;
+      case "New Zealand Dollar":
+        this.setState({ currency: "NZD" });
+        break;
+      case "South African Rand":
+        this.setState({ currency: "ZAR" });
+        break;
+      default:
+    }
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     var chosenCryptocurrency = [];
+    var chosenCurrency = this.state.currency;
     if (this.state.btc) {
       chosenCryptocurrency.push("btc");
     }
@@ -58,6 +92,12 @@ class Choose extends React.Component {
       chosenCryptocurrency.push("ltc");
     }
     console.log(chosenCryptocurrency);
+    console.log(chosenCurrency);
+    if (chosenCryptocurrency.length >= 1) {
+      // Main component for displaying data!
+    } else {
+      alert("Choose currency, please.");
+    }
   };
   render() {
     return (
@@ -69,7 +109,7 @@ class Choose extends React.Component {
               <label>
                 Bitcoin (BTC)
                 <input
-                  name="btc"
+                  name="BTC"
                   type="checkbox"
                   checked={this.state.btc}
                   onChange={this.handleCheck}
@@ -80,7 +120,7 @@ class Choose extends React.Component {
               <label>
                 Ethereum (ETH)
                 <input
-                  name="eth"
+                  name="ETH"
                   type="checkbox"
                   checked={this.state.eth}
                   onChange={this.handleCheck}
@@ -91,7 +131,7 @@ class Choose extends React.Component {
               <label>
                 Ripple (XRP)
                 <input
-                  name="xrp"
+                  name="XRP"
                   type="checkbox"
                   checked={this.state.xrp}
                   onChange={this.handleCheck}
@@ -104,7 +144,7 @@ class Choose extends React.Component {
               <label>
                 Bitcoin Cash (BCH)
                 <input
-                  name="bch"
+                  name="BCH"
                   type="checkbox"
                   checked={this.state.bch}
                   onChange={this.handleCheck}
@@ -115,7 +155,7 @@ class Choose extends React.Component {
               <label>
                 Cardano (ADA)
                 <input
-                  name="ada"
+                  name="ADA"
                   type="checkbox"
                   checked={this.state.ada}
                   onChange={this.handleCheck}
@@ -126,7 +166,7 @@ class Choose extends React.Component {
               <label>
                 Litecoin (LTC)
                 <input
-                  name="ltc"
+                  name="LTC"
                   type="checkbox"
                   checked={this.state.ltc}
                   onChange={this.handleCheck}
@@ -135,6 +175,20 @@ class Choose extends React.Component {
             </th>
           </tr>
         </table>
+        <div className="chooseCurrency" onChange={this.handleSelect}>
+          <label>Choose currency:</label>
+          <select value={this.state.currency}>
+            <option>U.S. Dollar</option>
+            <option>European Euro</option>
+            <option>Japanese Yen</option>
+            <option>British Pound</option>
+            <option>Swiss Franc</option>
+            <option>Canadian Dollar</option>
+            <option>Australian Dollar</option>
+            <option>New Zealand Dollar</option>
+            <option>South African Rand</option>
+          </select>
+        </div>
         <input type="submit" className="chooseCryptocurrency" value="Submit" />
       </form>
     );

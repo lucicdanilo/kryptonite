@@ -89,10 +89,8 @@ class Choose extends React.Component {
       chosenCryptocurrency.push("ADA");
     }
     if (this.state.ltc) {
-      chosenCryptocurrency.push("ltc");
+      chosenCryptocurrency.push("LTC");
     }
-    console.log(chosenCryptocurrency);
-    console.log(chosenCurrency);
     if (chosenCryptocurrency.length >= 1) {
       var obj = {
         chosenCryptocurrency: chosenCryptocurrency,
@@ -100,6 +98,7 @@ class Choose extends React.Component {
       };
       var formDataJSON = JSON.stringify(obj);
       localStorage.setItem("formData", formDataJSON);
+      console.log(formDataJSON);
     } else {
       alert("Choose currency, please.");
     }

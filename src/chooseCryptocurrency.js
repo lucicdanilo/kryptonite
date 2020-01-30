@@ -70,7 +70,6 @@ class Choose extends React.Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
     var chosenCryptocurrency = [];
     var chosenCurrency = this.state.currency;
     if (this.state.btc) {

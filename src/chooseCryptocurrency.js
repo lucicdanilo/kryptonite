@@ -72,6 +72,9 @@ class Choose extends React.Component {
   handleSubmit = event => {
     var chosenCryptocurrency = [];
     var chosenCurrency = this.state.currency;
+    if (chosenCurrency === "European Euro") {
+      chosenCurrency = "EUR";
+    }
     if (this.state.btc) {
       chosenCryptocurrency.push("BTC");
     }
@@ -97,7 +100,6 @@ class Choose extends React.Component {
       };
       var formDataJSON = JSON.stringify(obj);
       localStorage.setItem("formData", formDataJSON);
-      console.log(formDataJSON);
     } else {
       alert("Choose currency, please.");
     }

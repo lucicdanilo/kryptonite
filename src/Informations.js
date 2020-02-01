@@ -19,21 +19,20 @@ class Informations extends React.Component {
     }
 
     // Prices
+
     var urlPrices = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=";
 
     for (var i = 0; i <= chosenCryptocurrency.length - 1; i++) {
       urlPrices = urlPrices.concat(chosenCryptocurrency[i]);
       urlPrices = urlPrices.concat(",");
     }
-    urlPrices = urlPrices.substring(0, urlPrices.length - 1);
+    urlPrices = urlPrices.substring(0, urlPrices.length - 1); // Removing last ","
     urlPrices = urlPrices.concat("&tsyms=");
     urlPrices = urlPrices.concat(chosenCurrency);
 
     var responsePrices = httpGet(urlPrices);
     responsePrices = JSON.parse(responsePrices);
     console.log(responsePrices);
-    var cryptocurrencyPrices = responsePrices["BTC"];
-    cryptocurrencyPrices = cryptocurrencyPrices["EUR"];
 
     // Daily History 10 Days
     var urlHistory = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=";
@@ -61,6 +60,28 @@ class Informations extends React.Component {
     console.log(historicalData); // High price for evry chosen cryptocurrency
     console.log(timeData); // Time for label
 
+    function timeConverter(UNIX_timestamp) {
+      var a = new Date(UNIX_timestamp * 1000);
+      var months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+      var time = date + " " + month;
+      return time;
+    }
+
     // Six colors
     var backgroundColor = [
       "rgb(255, 30 , 30, 0.75)",
@@ -71,21 +92,41 @@ class Informations extends React.Component {
       "rgb(255, 0 , 255, 0.75)"
     ];
 
+    var labels = [
+      timeConverter(timeData[0]),
+      timeConverter(timeData[1]),
+      timeConverter(timeData[2]),
+      timeConverter(timeData[3]),
+      timeConverter(timeData[4]),
+      timeConverter(timeData[5]),
+      timeConverter(timeData[6]),
+      timeConverter(timeData[7]),
+      timeConverter(timeData[8]),
+      timeConverter(timeData[9]),
+      timeConverter(timeData[10])
+    ];
+
+    var datasets = [];
+    var dataArray = [];
+    var j = 0;
+    for (i = 0; i <= chosenCryptocurrency.length - 1; i++) {
+      var dataset = new Object();
+      dataset.label = chosenCryptocurrency[i];
+      dataset.backgroundColor = backgroundColor[i];
+      for (var k = 0; k <= 10; k++) {
+        dataArray.push(historicalData[j + k]);
+      }
+      dataset.data = dataArray;
+      dataArray = [];
+      datasets.push(dataset);
+      j += 11;
+    }
+    console.log(datasets);
+
     var chart = {
       data: {
-        labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-        datasets: [
-          {
-            label: "Video Mades",
-            backgroundColor: "rgb(255, 136, 30, 0.75)",
-            data: [4, 5, 1, 10, 32, 2, 12, 12, 8, 2]
-          },
-          {
-            label: "Subscriptions",
-            backgroundColor: "rgba(51, 147, 255, 0.75)",
-            data: [14, 15, 21, 0, 12, 4, 20, 8, 8, 4]
-          }
-        ]
+        labels: labels,
+        datasets: datasets
       }
     };
 

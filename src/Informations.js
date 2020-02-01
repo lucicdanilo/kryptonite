@@ -11,17 +11,6 @@ class Informations extends React.Component {
     console.log(chosenCurrency);
     // API Requests
 
-    var url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=";
-
-    for (var i = 0; i <= chosenCryptocurrency.length - 1; i++) {
-      url = url.concat(chosenCryptocurrency[i]);
-      url = url.concat(",");
-    }
-    url = url.substring(0, url.length - 1);
-    url = url.concat("&tsyms=");
-    url = url.concat(chosenCurrency);
-    console.log(url);
-    /*
     function httpGet(url) {
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open("GET", url, false);
@@ -29,13 +18,50 @@ class Informations extends React.Component {
       return xmlHttp.responseText;
     }
 
-    var response = httpGet(url);
-    console.log(response);
-    */
+    // Prices
+    var urlPrices = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=";
 
-    // Chart Data
+    for (var i = 0; i <= chosenCryptocurrency.length - 1; i++) {
+      urlPrices = urlPrices.concat(chosenCryptocurrency[i]);
+      urlPrices = urlPrices.concat(",");
+    }
+    urlPrices = urlPrices.substring(0, urlPrices.length - 1);
+    urlPrices = urlPrices.concat("&tsyms=");
+    urlPrices = urlPrices.concat(chosenCurrency);
 
-    // Mora biti 6 boja:
+    var responsePrices = httpGet(urlPrices);
+    responsePrices = JSON.parse(responsePrices);
+    console.log(responsePrices);
+    var cryptocurrencyPrices = responsePrices["BTC"];
+    cryptocurrencyPrices = cryptocurrencyPrices["EUR"];
+
+    // Daily History 10 Days
+    var urlHistory = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=";
+    var historicalData = [];
+    var timeData = [];
+
+    for (i = 0; i <= chosenCryptocurrency.length - 1; i++) {
+      urlHistory = urlHistory.concat(chosenCryptocurrency[i]);
+      urlHistory = urlHistory.concat("&tsym=");
+      urlHistory = urlHistory.concat(chosenCurrency);
+      urlHistory = urlHistory.concat("&limit=10");
+      console.log(urlHistory);
+
+      var responseHistory = httpGet(urlHistory);
+      responseHistory = JSON.parse(responseHistory);
+      responseHistory = responseHistory["Data"]["Data"];
+      console.log(responseHistory);
+      for (var j = 0; j <= 10; j++) {
+        historicalData.push(responseHistory[j]["high"]);
+        timeData.push(responseHistory[j]["time"]);
+      }
+
+      urlHistory = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=";
+    }
+    console.log(historicalData); // High price for evry chosen cryptocurrency
+    console.log(timeData); // Time for label
+
+    // Six colors
     var backgroundColor = [
       "rgb(255, 30 , 30, 0.75)",
       "rgba(0, 213, 72, 0.75)",

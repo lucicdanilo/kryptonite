@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
   
   .footer {
     position: fixed;
+    right: 0px;
     left: 0px;
     bottom: 0px;
     width: 100%;
@@ -87,5 +88,12 @@ export const GlobalStyles = createGlobalStyle`
     margin-left: 1%;
   }
 
+  .newsComponent {
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 2%;
+    position: absolute;
+    z-
+  }
   
 `;

@@ -1,6 +1,7 @@
 import React from "react";
 import News from "./News";
 import { Line } from "react-chartjs-2";
+import "./global";
 
 class Informations extends React.Component {
   render() {
@@ -132,8 +133,17 @@ class Informations extends React.Component {
 
     return (
       <div>
-        <h1>Informations</h1>
-        <div style={{ position: "relative", width: 600, height: 550 }}>
+        <div className="pricesAtThisMoment">
+          <h2>Prices at this moment:</h2>
+          <p>
+            {responsePrices[chosenCryptocurrency[0]][chosenCurrency]}
+            {chosenCurrency}
+          </p>
+        </div>
+        <div
+          className="historyChart"
+          style={{ position: "relative", width: 800, height: 600 }}
+        >
           <h3>Chart Samples</h3>
           <Line
             options={{
@@ -141,9 +151,9 @@ class Informations extends React.Component {
             }}
             data={chart.data}
           />
-        </div>
-        <div className="news">
-          <News />
+          <div>
+            <News />
+          </div>
         </div>
       </div>
     );

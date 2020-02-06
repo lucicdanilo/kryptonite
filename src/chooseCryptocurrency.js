@@ -182,7 +182,7 @@ class Choose extends React.Component {
         </table>
         <div className="chooseCurrency" onChange={this.handleSelect}>
           <label>Choose currency:</label>
-          <select value={this.state.currency}>
+          <select value={this.state.value}>
             <option name="USF">U.S. Dollar</option>
             <option name="EUR">European Euro</option>
             <option name="JPY">Japanese Yen</option>

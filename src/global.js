@@ -93,7 +93,28 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 8px;
     padding: 2%;
     position: absolute;
-    z-
   }
-  
+
+  .listOfCryptocurrencies {
+    list-style-type:none;
+    margin-top: 6%;
+    margin-bottom: 13%;
+    display: flex;
+    font-weight: bold;
+  }
+
+  .elementOfListOfChosenCryptocurrencies {
+    display: inline;
+    margin: 3%;
+  }
+
+  .chosenCryptocurrencyList {
+    margin-right: 1%;
+  }
+
+  .chosenCurrencyList {
+    margin-left: 0.4%;
+  }
+
+
 `;

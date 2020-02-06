@@ -35,6 +35,20 @@ class Informations extends React.Component {
     responsePrices = JSON.parse(responsePrices);
     console.log(responsePrices);
 
+    // Making list of li elements with informations
+    const listOfChosenCryptocurrencies = [];
+    for (i = 0; i <= chosenCryptocurrency.length - 1; i++) {
+      listOfChosenCryptocurrencies.push(
+        <li className="elementOfListOfChosenCryptocurrencies" key={i}>
+          <span className="chosenCryptocurrencyList">
+            {chosenCryptocurrency[i]}:
+          </span>
+          {responsePrices[chosenCryptocurrency[i]][chosenCurrency]}
+          <span className="chosenCurrencyList">{chosenCurrency}</span>
+        </li>
+      );
+    }
+
     // Daily History 10 Days
     var urlHistory = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=";
     var historicalData = [];
@@ -109,7 +123,7 @@ class Informations extends React.Component {
 
     var datasets = [];
     var dataArray = [];
-    var j = 0;
+    j = 0;
     for (i = 0; i <= chosenCryptocurrency.length - 1; i++) {
       var dataset = new Object();
       dataset.label = chosenCryptocurrency[i];
@@ -135,10 +149,9 @@ class Informations extends React.Component {
       <div>
         <div className="pricesAtThisMoment">
           <h2>Prices at this moment:</h2>
-          <p>
-            {responsePrices[chosenCryptocurrency[0]][chosenCurrency]}
-            {chosenCurrency}
-          </p>
+          <ul className="listOfCryptocurrencies">
+            {listOfChosenCryptocurrencies}
+          </ul>
         </div>
         <div
           className="historyChart"

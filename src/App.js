@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import "./App.css";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./global";
 import Choose from "./chooseCryptocurrency";
 import Informations from "./Informations";
+import "./App.css";
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  if (!localStorage.getItem("theme")) {
+    localStorage.setItem("theme", "light");
+    setTheme("light");
+  }
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   // The function that toggles between themes
   const toggleTheme = () => {
     // if the theme is not light, then set it to dark
     if (theme === "light") {
       setTheme("dark");
+      localStorage.setItem("theme", "dark");
       // otherwise, it should be light
     } else {
       setTheme("light");
+      localStorage.setItem("theme", "light");
     }
   };
 

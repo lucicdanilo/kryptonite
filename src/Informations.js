@@ -8,8 +8,6 @@ class Informations extends React.Component {
     var formData = JSON.parse(this.props.formData);
     var chosenCryptocurrency = formData["chosenCryptocurrency"];
     var chosenCurrency = formData["chosenCurrency"];
-    console.log(chosenCryptocurrency);
-    console.log(chosenCurrency);
     // API Requests
 
     function httpGet(url) {
@@ -33,7 +31,6 @@ class Informations extends React.Component {
 
     var responsePrices = httpGet(urlPrices);
     responsePrices = JSON.parse(responsePrices);
-    console.log(responsePrices);
 
     // Making list of li elements with informations
     const listOfChosenCryptocurrencies = [];
@@ -59,12 +56,10 @@ class Informations extends React.Component {
       urlHistory = urlHistory.concat("&tsym=");
       urlHistory = urlHistory.concat(chosenCurrency);
       urlHistory = urlHistory.concat("&limit=10");
-      console.log(urlHistory);
 
       var responseHistory = httpGet(urlHistory);
       responseHistory = JSON.parse(responseHistory);
       responseHistory = responseHistory["Data"]["Data"];
-      console.log(responseHistory);
       for (var j = 0; j <= 10; j++) {
         historicalData.push(responseHistory[j]["high"]);
         timeData.push(responseHistory[j]["time"]);
@@ -72,8 +67,6 @@ class Informations extends React.Component {
 
       urlHistory = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=";
     }
-    console.log(historicalData); // High price for evry chosen cryptocurrency
-    console.log(timeData); // Time for label
 
     function timeConverter(UNIX_timestamp) {
       var a = new Date(UNIX_timestamp * 1000);
@@ -99,8 +92,8 @@ class Informations extends React.Component {
 
     // Six colors
     var backgroundColor = [
-      "rgb(255, 30 , 30, 0.75)",
       "rgba(0, 213, 72, 0.75)",
+      "rgb(255, 30 , 30, 0.75)",
       "rgba(51, 147, 255, 0.75)",
       "rgb(255, 136, 30, 0.75)",
       "rgb(255, 235, 30, 0.75)",
@@ -136,7 +129,6 @@ class Informations extends React.Component {
       datasets.push(dataset);
       j += 11;
     }
-    console.log(datasets);
 
     var chart = {
       data: {
@@ -145,6 +137,15 @@ class Informations extends React.Component {
       }
     };
 
+    function refreshValues() {
+      window.location.reload(false);
+    }
+
+    function clearFormData() {
+      localStorage.removeItem("formData");
+      window.location.reload(false);
+    }
+
     return (
       <div>
         <div className="pricesAtThisMoment">
@@ -152,19 +153,23 @@ class Informations extends React.Component {
           <ul className="listOfCryptocurrencies">
             {listOfChosenCryptocurrencies}
           </ul>
+          <div className="twoButtons">
+            <button className="refreshButton" onClick={refreshValues}>
+              Refresh
+            </button>
+            <button className="changeOptions" onClick={clearFormData}>
+              Change Options
+            </button>
+          </div>
         </div>
-        <div
-          className="historyChart"
-          style={{ position: "relative", width: 800, height: 600 }}
-        >
-          <h3>Chart Samples</h3>
+        <div className="historyChart">
           <Line
             options={{
               responsive: true
             }}
             data={chart.data}
           />
-          <div>
+          <div className="divNews">
             <News />
           </div>
         </div>

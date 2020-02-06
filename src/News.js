@@ -52,10 +52,6 @@ class News extends React.Component {
       return time;
     }
 
-    console.log(publishedOn);
-    console.log(newsTitles);
-    console.log(newsBody);
-
     return (
       <div>
         <h3>News</h3>

@@ -47,6 +47,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 4px 2px;
     cursor: pointer;
     border: 2px solid #00d548;
+    border-radius: 15px;
   }
   
   form > h1{
@@ -93,12 +94,15 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 8px;
     padding: 2%;
     position: absolute;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 5%;
   }
 
   .listOfCryptocurrencies {
     list-style-type:none;
-    margin-top: 6%;
-    margin-bottom: 13%;
+    margin-top: 5%;
+    margin-bottom: 1%;
     display: flex;
     font-weight: bold;
   }
@@ -109,12 +113,50 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .chosenCryptocurrencyList {
-    margin-right: 1%;
+    margin-right: 8%;
   }
 
   .chosenCurrencyList {
-    margin-left: 0.4%;
+    margin-left: 3.4%;
   }
 
+  .historyChart {
+    position: "relative";
+    width: 60%;
+    height: 600;
+    margin: 0 auto;
+    margin-top: 1%;
+  }
 
+  .divNews {
+    margin-top: 20%;
+  }
+
+  .refreshButton {
+    background-color: ${({ theme }) => theme.themeButton};
+    color: #00d548;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-right: 0.5%; 
+    cursor: pointer;
+    border: 2px solid #00d548;
+    border-radius: 15px;
+  }
+
+  .changeOptions {
+    background-color: ${({ theme }) => theme.themeButton};
+    color: #00d548;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 0.5%;
+    cursor: pointer;
+    border: 2px solid #00d548;
+    border-radius: 15px;
+  }
+
+  .twoButtons {
+    margin-bottom: 8%;
+  }
 `;

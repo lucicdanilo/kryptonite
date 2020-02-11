@@ -1,3 +1,6 @@
+# Kryptonite
+
+
 With this React app you can get informations of cryptocurrencies prices an compare them too. For best UX I added dark and light theme.
 
 [Live version of application](https://krypt0nite.netlify.com/)

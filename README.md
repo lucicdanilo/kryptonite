@@ -9,4 +9,8 @@ For cryptocurrencie prices I use this [API](https://min-api.cryptocompare.com/).
 
 
 
+
+
+
 Used technologies: HTML / CSS / React / API / Chart.js 
+
